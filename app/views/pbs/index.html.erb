@@ -14,8 +14,25 @@
   </thead>
 
   <tbody>
-    <% @pbs.sort.each do |pb| %>
+    <% @pbs.each do |pb| %>
       <tr>
+        <% if pb.l1 && pb.l2 && pb.l3 && pb.l4 %>
+            <td><%= pb.l1.to_s + '.' + pb.l2.to_s + '.' + pb.l3.to_s + '.' + pb.l4.to_s%></td>
+        <%else %>
+            <% if pb.l1 && pb.l2 && pb.l3%>
+                <td><%= pb.l1.to_s + '.' + pb.l2.to_s + '.' + pb.l3.to_s %></td>
+            <% else %>
+                <% if pb.l1 && pb.l2 %>
+                    <td><%= pb.l1.to_s + '.' + pb.l2.to_s %></td>
+                <% else %>
+                    <% if pb.l1 %>
+                        <td><%= pb.l1 %></td>
+                    <% else %>
+                        <td></td>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
         <td><%= pb.name %></td>
         <td><%= pb.parent_id %></td>
         <td><%= pb.ebene %></td>

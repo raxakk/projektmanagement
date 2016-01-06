@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160106163806) do
+ActiveRecord::Schema.define(version: 20160106223232) do
 
   create_table "pbs", force: :cascade do |t|
     t.string   "name"
@@ -20,6 +20,10 @@ ActiveRecord::Schema.define(version: 20160106163806) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "ebene"
+    t.integer  "l1"
+    t.integer  "l2"
+    t.integer  "l3"
+    t.integer  "l4"
   end
 
   create_table "rbs", force: :cascade do |t|
@@ -30,6 +34,8 @@ ActiveRecord::Schema.define(version: 20160106163806) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "ebene"
+    t.integer  "l1"
+    t.integer  "l2"
   end
 
   create_table "wbs", force: :cascade do |t|
@@ -43,6 +49,9 @@ ActiveRecord::Schema.define(version: 20160106163806) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "ebene"
+    t.integer  "l1"
+    t.integer  "l2"
+    t.integer  "l3"
   end
 
   create_table "workers", force: :cascade do |t|

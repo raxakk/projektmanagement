@@ -19,6 +19,19 @@
   <tbody>
     <% @wbs.each do |wb| %>
       <tr>
+        <% if wb.l1 && wb.l2 && wb.l3%>
+            <td><%= wb.l1.to_s + '.' + wb.l2.to_s + '.' + wb.l3.to_s %></td>
+        <% else %>
+            <% if wb.l1 && wb.l2 %>
+                <td><%= wb.l1.to_s + '.' + wb.l2.to_s %></td>
+            <% else %>
+                <% if wb.l1 %>
+                    <td><%= wb.l1 %></td>
+                <% else %>
+                    <td></td>
+                <% end %>
+            <% end %>
+        <% end %>
         <td><%= wb.name %></td>
         <td><%= wb.parent_id %></td>
         <td><%= wb.beschreibung %></td>

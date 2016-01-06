@@ -4,7 +4,7 @@ class PbsController < ApplicationController
   # GET /pbs
   # GET /pbs.json
   def index
-    @pbs = Pb.all
+    @pbs = Pb.all.order(l1: :asc, l2: :asc, l3: :asc, l4: :asc)
   end
 
   # GET /pbs/1
@@ -23,6 +23,14 @@ class PbsController < ApplicationController
     @pb = Pb.new
     @pb.parent_id = params[:id]
     @pb.ebene = 1
+
+    counter = 1
+
+    while !Pb.where(l1: counter ).blank?
+      counter = counter + 1
+    end
+
+    @pb.l1 = counter
   end
 
   # GET /pbs/1/newModul
@@ -30,6 +38,16 @@ class PbsController < ApplicationController
     @pb = Pb.new
     @pb.parent_id = params[:id]
     @pb.ebene = 2
+
+    @pb.l1 = Pb.find(params[:id]).l1
+
+    counter = 1
+
+    while !Pb.where(l1: @pb.l1, l2: counter ).blank?
+      counter = counter + 1
+    end
+
+    @pb.l2 = counter
   end
 
   # GET /pbs/1/newTeilmodul
@@ -37,6 +55,16 @@ class PbsController < ApplicationController
     @pb = Pb.new
     @pb.parent_id = params[:id]
     @pb.ebene = 3
+
+    @pb.l1 = Pb.find(params[:id]).l1
+    @pb.l2 = Pb.find(params[:id]).l2
+
+    counter = 1
+    while !Pb.where(l1: @pb.l1, l2: @pb.l2, l3: counter ).blank?
+      counter = counter + 1
+    end
+
+    @pb.l3 = counter
   end
 
   # GET /pbs/1/newKomponente
@@ -44,6 +72,16 @@ class PbsController < ApplicationController
     @pb = Pb.new
     @pb.parent_id = params[:id]
     @pb.ebene = 4
+
+    @pb.l1 = Pb.find(params[:id]).l1
+    @pb.l2 = Pb.find(params[:id]).l2
+    @pb.l3 = Pb.find(params[:id]).l3
+    counter = 1
+    while !Pb.where(l1: @pb.l1, l2: @pb.l2, l3: @pb.l3, l4: counter ).blank?
+      counter = counter + 1
+    end
+
+    @pb.l4 = counter
   end
 
   # GET /pbs/1/edit
@@ -98,6 +136,6 @@ class PbsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pb_params
-      params.require(:pb).permit(:name, :parent_id, :beschreibung, :ebene)
+      params.require(:pb).permit(:name, :parent_id, :beschreibung, :ebene, :l1, :l2, :l3, :l4)
     end
 end
