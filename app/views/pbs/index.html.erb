@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Product Breakdown Structure</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Parent</th>
+      <th>Ebene</th>
+      <th>Beschreibung</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pbs.sort.each do |pb| %>
+      <tr>
+        <td><%= pb.name %></td>
+        <td><%= pb.parent_id %></td>
+        <td><%= pb.ebene %></td>
+        <td><%= pb.beschreibung %></td>
+        <td><%= link_to 'Show', pb %></td>
+        <td><%= link_to 'Edit', edit_pb_path(pb) %></td>
+        <td><%= link_to 'Destroy', pb, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Teilprodukt hinzufügen', new_teilprodukt_path(id: pb.id) if pb.ebene == 0 %></td>
+        <td><%= link_to 'Modul hinzufügen', new_modul_path(id: pb.id) if pb.ebene == 1%></td>
+        <td><%= link_to 'Teilmodul hinzufügen', new_teilmodul_path(id: pb.id) if pb.ebene == 2%></td>
+        <td><%= link_to 'Komponente hinzufügen', new_komponente_path(id: pb.id) if pb.ebene == 3%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Neues Produkt anlegen', new_pb_path %>

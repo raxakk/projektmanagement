@@ -1,0 +1,35 @@
+<%= form_for(@rb) do |f| %>
+  <% if @rb.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@rb.errors.count, "error") %> prohibited this rb from being saved:</h2>
+
+      <ul>
+      <% @rb.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :parent_id %>
+  </div>
+  <div class="field">
+    <%= f.label :qualifikation %><br>
+    <%= f.text_field :qualifikation %>
+  </div>
+  <div class="field">
+    <%= f.label :erfahrung %><br>
+    <%= f.text_field :erfahrung %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :ebene %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Hinzufügen' %>
+  </div>
+<% end %>

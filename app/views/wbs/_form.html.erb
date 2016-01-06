@@ -1,0 +1,45 @@
+<%= form_for(@wb) do |f| %>
+  <% if @wb.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@wb.errors.count, "error") %> prohibited this wb from being saved:</h2>
+
+      <ul>
+      <% @wb.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :parent_id %>
+  </div>
+  <div class="field">
+    <%= f.label :beschreibung %><br>
+    <%= f.text_field :beschreibung %>
+  </div>
+  <div class="field">
+    <%= f.label :start %><br>
+    <%= f.date_select :start %>
+  </div>
+  <div class="field">
+    <%= f.label :end %><br>
+    <%= f.date_select :end %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :rb_id %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :ebene %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :worker_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Hinzufügen' %>
+  </div>
+<% end %>

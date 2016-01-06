@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @wb.name %>
+</p>
+
+<p>
+  <strong>Parent:</strong>
+  <%= @wb.parent_id %>
+</p>
+
+<p>
+  <strong>Beschreibung:</strong>
+  <%= @wb.beschreibung %>
+</p>
+
+<p>
+  <strong>Start:</strong>
+  <%= @wb.start %>
+</p>
+
+<p>
+  <strong>End:</strong>
+  <%= @wb.end %>
+</p>
+
+<p>
+  <strong>Rb:</strong>
+  <%= @wb.rb_id %>
+</p>
+
+<p>
+  <strong>Worker:</strong>
+  <%= @wb.worker_id %>
+</p>
+
+<%= link_to 'Edit', edit_wb_path(@wb) %> |
+<%= link_to 'Back', wbs_path %>

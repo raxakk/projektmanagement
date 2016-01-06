@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Rbs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Parent</th>
+      <th>Qualifikation</th>
+      <th>Erfahrung</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rbs.each do |rb| %>
+      <tr>
+        <td><%= rb.name %></td>
+        <td><%= rb.parent_id %></td>
+        <td><%= rb.qualifikation %></td>
+        <td><%= rb.erfahrung %></td>
+        <td><%= link_to 'Show', rb %></td>
+        <td><%= link_to 'Edit', edit_rb_path(rb) %></td>
+        <td><%= link_to 'Destroy', rb, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Art hinzufügen', new_art_path(id: rb.id) if rb.ebene == 0 %></td>
+        <td><%= link_to 'Rolle hinzufügen', new_rolle_path(id: rb.id) if rb.ebene == 1%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Neues Projekt anlegen', new_rb_path %>

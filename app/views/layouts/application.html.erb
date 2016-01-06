@@ -7,7 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+	<nav>
+    <%= link_to 'Product Breakdown Structure', pbs_path %>
+    <%= link_to 'Work Breakdown Structure', wbs_path %>
+    <%= link_to 'Resource Breakdown Structure', rbs_path%>
+    <%= link_to 'Ressource Allocation Matrix' %>
+    <%= link_to 'Breitband-Delphi' %>
+    <%= link_to 'Roadmap' %>
+    <%= link_to 'Mitarbeiter verwalten', workers_path %>
+  </nav>
 <%= yield %>
 
 </body>

@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  resources :workers
+  resources :rbs
+  resources :wbs
+  resources :pbs
+
+  get 'pbs/:id/new_teilprodukt' => 'pbs#new_teilprodukt', as: :new_teilprodukt
+  get 'pbs/:id/new_modul' => 'pbs#new_modul', as: :new_modul
+  get 'pbs/:id/new_teilmodul' => 'pbs#new_teilmodul', as: :new_teilmodul
+  get 'pbs/:id/new_komponente' => 'pbs#new_komponente', as: :new_komponente
+
+  get 'wbs/:id/new_aufgabe' => 'wbs#new_aufgabe', as: :new_aufgabe
+  get 'wbs/:id/new_teilaufgabe' => 'wbs#new_teilaufgabe', as: :new_teilaufgabe
+  get 'wbs/:id/new_arbeitspaket' => 'wbs#new_arbeitspaket', as: :new_arbeitspaket
+
+  get 'rbs/:id/new_art' => 'rbs#new_art', as: :new_art
+  get 'rbs/:id/new_rolle' => 'rbs#new_rolle', as: :new_rolle
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

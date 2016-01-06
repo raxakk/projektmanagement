@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Wbs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Parent</th>
+      <th>Beschreibung</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Rb</th>
+      <th>Worker</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @wbs.each do |wb| %>
+      <tr>
+        <td><%= wb.name %></td>
+        <td><%= wb.parent_id %></td>
+        <td><%= wb.beschreibung %></td>
+        <td><%= wb.start %></td>
+        <td><%= wb.end %></td>
+        <td><%= wb.rb_id %></td>
+        <td><%= wb.worker_id %></td>
+        <td><%= link_to 'Show', wb %></td>
+        <td><%= link_to 'Edit', edit_wb_path(wb) %></td>
+        <td><%= link_to 'Destroy', wb, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Aufgabe hinzufügen', new_aufgabe_path(id: wb.id) if wb.ebene == 0 %></td>
+        <td><%= link_to 'Teilaufgabe hinzufügen', new_teilaufgabe_path(id: wb.id) if wb.ebene == 1%></td>
+        <td><%= link_to 'Arbeitspaket hinzufügen', new_arbeitspaket_path(id: wb.id) if wb.ebene == 2%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Neue Gesamtaufgabe anlegen', new_wb_path %>
