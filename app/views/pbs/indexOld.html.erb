@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Product Breakdown Structure</h1>
+
+<table class="table-bordered">
+  <thead>
+  <tr>
+    <th>Produkt</th>
+    <th>Teilprodukt</th>
+    <th>Modul</th>
+    <th>Komponente</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @pbs.sort.each do |pb| %>
+      <tr>
+        <% if pb.ebene == 0 %>
+            <td><%= link_to pb.name, pb %></td>
+        <% else %>
+            <td> </td>
+        <% end %>
+        <% if pb.ebene == 1 %>
+            <td><%= link_to pb.name, pb %></td>
+        <% else %>
+            <td> </td>
+        <% end %>
+        <% if pb.ebene == 2 %>
+            <td><%= link_to pb.name, pb %></td>
+        <% else %>
+            <td> </td>
+        <% end %>
+        <% if pb.ebene == 3 %>
+            <td><%= link_to pb.name, pb %></td>
+        <% else %>
+            <td> </td>
+        <% end %>
+        <td><%= link_to 'Edit', edit_pb_path(pb) %></td>
+        <td><%= link_to 'Destroy', pb, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if pb.ebene == 0 %>
+            <td><%= link_to 'Teilprodukt hinzufügen', new_teilprodukt_path(id: pb.id) %></td>
+        <% else if pb.ebene == 1 %>
+                <td><%= link_to 'Modul hinzufügen', new_modul_path(id: pb.id) %></td>
+            <% else if pb.ebene == 2 %>
+                    <td><%= link_to 'Teilmodul hinzufügen', new_teilmodul_path(id: pb.id) %></td>
+                <% else if pb.ebene == 3 %>
+                        <td><%= link_to 'Komponente hinzufügen', new_komponente_path(id: pb.id) %></td>
+                    <% end %>
+                <% end %>
+            <%end%>
+        <%end%>
+
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Neues Produkt anlegen', new_pb_path %>
