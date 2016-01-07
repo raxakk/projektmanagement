@@ -4,16 +4,16 @@
 
 <table class="table-bordered">
   <thead>
-    <tr>
-      <th>Produkt</th>
-      <th>Teilprodukt</th>
-      <th>Modul</th>
-      <th>Komponente</th>
-    </tr>
+  <tr>
+    <th>Produkt</th>
+    <th>Teilprodukt</th>
+    <th>Modul</th>
+    <th>Komponente</th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @pbs.sort.each do |pb| %>
+  <% @pbs.sort.each do |pb| %>
       <tr>
         <% if pb.ebene == 0 %>
             <td><%= link_to pb.name, pb %></td>
@@ -45,13 +45,13 @@
                     <td><%= link_to 'Teilmodul hinzufügen', new_teilmodul_path(id: pb.id) %></td>
                 <% else if pb.ebene == 3 %>
                         <td><%= link_to 'Komponente hinzufügen', new_komponente_path(id: pb.id) %></td>
+                    <% end %>
                 <% end %>
-            <% end %>
-        <%end%>
+            <%end%>
         <%end%>
 
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 

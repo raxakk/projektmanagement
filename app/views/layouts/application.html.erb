@@ -7,15 +7,35 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<nav>
-    <%= link_to 'Product Breakdown Structure', pbs_path %>
-    <%= link_to 'Work Breakdown Structure', wbs_path %>
-    <%= link_to 'Resource Breakdown Structure', rbs_path%>
-    <%= link_to 'Ressource Allocation Matrix' %>
-    <%= link_to 'Breitband-Delphi' %>
-    <%= link_to 'Roadmap' %>
-    <%= link_to 'Mitarbeiter verwalten', workers_path %>
-  </nav>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Projektmanagement</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><%= link_to 'PBS', pbs_path, title: 'Product Breakdown Structure' %></li>
+        <li><%= link_to 'WBS', wbs_path, title: 'Work Breakdown Structure' %></li>
+        <li><%= link_to 'RBS', rbs_path, title: 'Resource Breakdown Structure' %></li>
+        <li><%= link_to 'RAM', '/#', title: 'Ressource Allocation Matrix' %></li>
+        <li><%= link_to 'Breitband-Delphi' %></li>
+        <li><%= link_to 'Roadmap' %></li>
+        <li><%= link_to 'Mitarbeiter verwalten', workers_path %></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
 <%= yield %>
 
 </body>
