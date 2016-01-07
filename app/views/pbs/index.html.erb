@@ -2,58 +2,76 @@
 
 <h1>Product Breakdown Structure</h1>
 
-<table class="table-bordered">
+<table class="table">
   <thead>
-    <tr>
-      <th>Produkt</th>
-      <th>Teilprodukt</th>
-      <th>Modul</th>
-      <th>Komponente</th>
-    </tr>
+  <tr>
+    <th class="btn-success" width="100">Produkt</th>
+    <th class="btn-info" width="100">Teilprodukt</th>
+    <th class="btn-warning" width="100">Modul</th>
+    <th class="btn-danger" width="100">Teilmodul</th>
+    <th class="btn-default" width="100">Komponente</th>
+    <th></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @pbs.each do |pb| %>
+  <% @pbs.each do |pb| %>
       <tr>
         <% if pb.l1 && pb.l2 && pb.l3 && pb.l4 %>
-            <td><%= pb.l1.to_s + '.' + pb.l2.to_s + '.' + pb.l3.to_s + '.' + pb.l4.to_s%></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="btn-default"><%= pb.l1.to_s + '.' + pb.l2.to_s + '.' + pb.l3.to_s + '.' + pb.l4.to_s%></td>
+            <td class="btn-default"><%= link_to pb.name, pb %></td>
         <%else %>
             <% if pb.l1 && pb.l2 && pb.l3%>
-                <td><%= pb.l1.to_s + '.' + pb.l2.to_s + '.' + pb.l3.to_s %></td>
+                <td></td>
+                <td></td>
+                <td class="btn-danger"><%= pb.l1.to_s + '.' + pb.l2.to_s + '.' + pb.l3.to_s %></td>
+                <td class="btn-danger"><%= link_to pb.name, pb %></td>
             <% else %>
                 <% if pb.l1 && pb.l2 %>
-                    <td><%= pb.l1.to_s + '.' + pb.l2.to_s %></td>
+                    <td></td>
+                    <td class="btn-warning"><%= pb.l1.to_s + '.' + pb.l2.to_s %></td>
+                    <td class="btn-warning"><%= link_to pb.name, pb %></td>
                 <% else %>
                     <% if pb.l1 %>
-                        <td><%= pb.l1 %></td>
+                        <td class="btn-info"><%= pb.l1 %></td>
+                        <td class="btn-info"><%= link_to pb.name, pb %></td>
                     <% else %>
-                        <td></td>
+                        <td class="btn-success"><%= link_to pb.name, pb %></td>
                     <% end %>
                 <% end %>
             <% end %>
         <% end %>
-        <td><%= pb.name %></td>
-        <td><%= pb.parent_id %></td>
-        <td><%= pb.ebene %></td>
-        <td><%= pb.beschreibung %></td>
-        <td><%= link_to 'Show', pb %></td>
-        <td><%= link_to 'Edit', edit_pb_path(pb) %></td>
-        <td><%= link_to 'Destroy', pb, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% if pb.ebene == 0 %>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td><%= link_to 'Teilprodukt hinzufügen', new_teilprodukt_path(id: pb.id) %></td>
         <% else if pb.ebene == 1 %>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td><%= link_to 'Modul hinzufügen', new_modul_path(id: pb.id) %></td>
             <% else if pb.ebene == 2 %>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td><%= link_to 'Teilmodul hinzufügen', new_teilmodul_path(id: pb.id) %></td>
                 <% else if pb.ebene == 3 %>
+                        <td></td>
+                        <td></td>
                         <td><%= link_to 'Komponente hinzufügen', new_komponente_path(id: pb.id) %></td>
+                    <% end %>
                 <% end %>
-            <% end %>
+            <%end%>
         <%end%>
-        <%end%>
-
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
