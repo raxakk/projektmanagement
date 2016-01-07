@@ -4,7 +4,7 @@ class WbsController < ApplicationController
   # GET /wbs
   # GET /wbs.json
   def index
-    @wbs = Wb.all
+    @wbs = Wb.all.order(l1: :asc, l2: :asc, l3: :asc)
   end
 
   # GET /wbs/1
@@ -23,18 +23,44 @@ class WbsController < ApplicationController
     @wb = Wb.new
     @wb.parent_id = params[:id]
     @wb.ebene = 1
+
+    counter = 1
+    while !Wb.where(l1: counter ).blank?
+      counter = counter + 1
+    end
+    @wb.l1 = counter
+
   end
 
   def new_teilaufgabe
     @wb = Wb.new
     @wb.parent_id = params[:id]
     @wb.ebene = 2
+
+    @wb.l1 = Wb.find(params[:id]).l1
+
+    counter = 1
+    while !Wb.where(l1: @wb.l1, l2: counter ).blank?
+      counter = counter + 1
+    end
+
+    @wb.l2 = counter
   end
 
   def new_arbeitspaket
     @wb = Wb.new
     @wb.parent_id = params[:id]
     @wb.ebene = 3
+
+    @wb.l1 = Wb.find(params[:id]).l1
+    @wb.l2 = Wb.find(params[:id]).l2
+
+    counter = 1
+    while !Wb.where(l1: @wb.l1, l2: @wb.l2, l3: counter ).blank?
+      counter = counter + 1
+    end
+
+    @wb.l3 = counter
   end
 
   # GET /wbs/1/edit
@@ -89,6 +115,6 @@ class WbsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wb_params
-      params.require(:wb).permit(:name, :parent_id, :beschreibung, :start, :end, :rb_id, :worker_id, :ebene)
+      params.require(:wb).permit(:name, :parent_id, :beschreibung, :start, :end, :rb_id, :worker_id, :ebene, :l1, :l2, :l3)
     end
 end

@@ -4,7 +4,7 @@ class RbsController < ApplicationController
   # GET /rbs
   # GET /rbs.json
   def index
-    @rbs = Rb.all
+    @rbs = Rb.all.order(l1: :asc, l2: :asc)
   end
 
   # GET /rbs/1
@@ -23,12 +23,31 @@ class RbsController < ApplicationController
     @rb = Rb.new
     @rb.parent_id = params[:id]
     @rb.ebene = 1
+
+    counter = 1
+
+    while !Rb.where(l1: counter ).blank?
+      counter = counter + 1
+    end
+
+    @rb.l1 = counter
   end
 
   def new_rolle
     @rb = Rb.new
     @rb.parent_id = params[:id]
     @rb.ebene = 2
+
+    @rb.l1 = Rb.find(params[:id]).l1
+
+    counter = 1
+
+    while !Rb.where(l1: @rb.l1, l2: counter ).blank?
+      counter = counter + 1
+    end
+
+    @rb.l2 = counter
+
   end
 
 
@@ -84,6 +103,6 @@ class RbsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rb_params
-      params.require(:rb).permit(:name, :parent_id, :qualifikation, :erfahrung, :ebene)
+      params.require(:rb).permit(:name, :parent_id, :qualifikation, :erfahrung, :ebene, :l1, :l2)
     end
 end

@@ -13,28 +13,30 @@
   </thead>
 
   <tbody>
-    <% @pbs.sort.each do |pb| %>
+    <% @pbs.each do |pb| %>
       <tr>
-        <% if pb.ebene == 0 %>
-            <td><%= link_to pb.name, pb %></td>
-        <% else %>
-            <td> </td>
+        <% if pb.l1 && pb.l2 && pb.l3 && pb.l4 %>
+            <td><%= pb.l1.to_s + '.' + pb.l2.to_s + '.' + pb.l3.to_s + '.' + pb.l4.to_s%></td>
+        <%else %>
+            <% if pb.l1 && pb.l2 && pb.l3%>
+                <td><%= pb.l1.to_s + '.' + pb.l2.to_s + '.' + pb.l3.to_s %></td>
+            <% else %>
+                <% if pb.l1 && pb.l2 %>
+                    <td><%= pb.l1.to_s + '.' + pb.l2.to_s %></td>
+                <% else %>
+                    <% if pb.l1 %>
+                        <td><%= pb.l1 %></td>
+                    <% else %>
+                        <td></td>
+                    <% end %>
+                <% end %>
+            <% end %>
         <% end %>
-        <% if pb.ebene == 1 %>
-            <td><%= link_to pb.name, pb %></td>
-        <% else %>
-            <td> </td>
-        <% end %>
-        <% if pb.ebene == 2 %>
-            <td><%= link_to pb.name, pb %></td>
-        <% else %>
-            <td> </td>
-        <% end %>
-        <% if pb.ebene == 3 %>
-            <td><%= link_to pb.name, pb %></td>
-        <% else %>
-            <td> </td>
-        <% end %>
+        <td><%= pb.name %></td>
+        <td><%= pb.parent_id %></td>
+        <td><%= pb.ebene %></td>
+        <td><%= pb.beschreibung %></td>
+        <td><%= link_to 'Show', pb %></td>
         <td><%= link_to 'Edit', edit_pb_path(pb) %></td>
         <td><%= link_to 'Destroy', pb, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% if pb.ebene == 0 %>
