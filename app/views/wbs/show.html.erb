@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<h1>Details</h1>
 <p>
   <strong>Name:</strong>
   <%= @wb.name %>
@@ -35,5 +35,6 @@
   <%= @wb.worker_id %>
 </p>
 
-<%= link_to 'Edit', edit_wb_path(@wb) %> |
-<%= link_to 'Back', wbs_path %>
+<%= button_to 'Edit', edit_pb_path(@pb), class:"btn btn-warning", method: :get %>
+<br>
+<%= button_to 'Back', pbs_path, class:"btn btn-primary", method: :get %>

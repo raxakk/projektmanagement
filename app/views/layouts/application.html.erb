@@ -36,7 +36,25 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<%= yield %>
+
+<div class="container">
+  <div class="innercontainer">
+    <div class="row">
+      <div class="col-lg-6">
+        <noscript>
+          <div class= "alertjava">
+            <h3>
+              Diese Seite wird nur mit JavaScript
+              korrekt dargestellt. Bitte schalten
+              Sie JavaScript in Ihrem Browser ein!
+            </h3>
+          </div>
+        </noscript>
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

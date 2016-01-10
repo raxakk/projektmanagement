@@ -16,6 +16,10 @@ class PbsController < ApplicationController
   def new
     @pb = Pb.new
     @pb.ebene = 0
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /pbs/1/newTeilprodukt
@@ -31,6 +35,10 @@ class PbsController < ApplicationController
     end
 
     @pb.l1 = counter
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /pbs/1/newModul
@@ -48,6 +56,10 @@ class PbsController < ApplicationController
     end
 
     @pb.l2 = counter
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /pbs/1/newTeilmodul
@@ -65,6 +77,10 @@ class PbsController < ApplicationController
     end
 
     @pb.l3 = counter
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /pbs/1/newKomponente
@@ -82,6 +98,10 @@ class PbsController < ApplicationController
     end
 
     @pb.l4 = counter
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /pbs/1/edit
@@ -138,4 +158,5 @@ class PbsController < ApplicationController
     def pb_params
       params.require(:pb).permit(:name, :parent_id, :beschreibung, :ebene, :l1, :l2, :l3, :l4)
     end
+
 end
