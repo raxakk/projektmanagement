@@ -1,44 +1,72 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Rbs</h1>
+<h1>Resource Breakdown Structure</h1>
 
-<table>
+<table class="table">
   <thead>
-    <tr>
-      <th>Name</th>
-      <th>Parent</th>
-      <th>Qualifikation</th>
-      <th>Erfahrung</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th class="gruenerKasten" width="100">Projekt</th>
+    <th class="blauerKasten" width="100">Art</th>
+    <th class="gelberKasten" width="100">Rolle</th>
+    <th class="grauerKasten" width="100">Qualifikation</th>
+    <th class="grauerKasten" width="100">Erfahrung</th>
+    <th></th>
+    <th></th>
+  </tr>
   </thead>
-
   <tbody>
-    <% @rbs.each do |rb| %>
+  <% @rbs.each do |rb| %>
       <tr>
         <% if rb.l1 && rb.l2 %>
-            <td><%= rb.l1.to_s + '.' + rb.l2.to_s %></td>
+            <td></td>
+            <td class="gelberKasten"><%= rb.l1.to_s + '.' + rb.l2.to_s %></td>
+            <td class="gelberKasten"><%= link_to rb.name, rb %></td>
         <% else %>
             <% if rb.l1 %>
-                <td><%= rb.l1 %></td>
+                <td class="blauerKasten"><%= rb.l1 %></td>
+                <td class="blauerKasten"><%= link_to rb.name, rb %></td>
             <% else %>
-                <td></td>
+                <td class="gruenerKasten"><%= link_to rb.name, rb %></td>
             <% end %>
         <% end %>
-        <td><%= rb.name %></td>
-        <td><%= rb.parent_id %></td>
-        <td><%= rb.qualifikation %></td>
-        <td><%= rb.erfahrung %></td>
-        <td><%= link_to 'Show', rb %></td>
-        <td><%= link_to 'Edit', edit_rb_path(rb) %></td>
-        <td><%= link_to 'Destroy', rb, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Art hinzufügen', new_art_path(id: rb.id) if rb.ebene == 0 %></td>
-        <td><%= link_to 'Rolle hinzufügen', new_rolle_path(id: rb.id) if rb.ebene == 1%></td>
+        <% if rb.ebene == 0 %>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><%= link_to new_art_path(id: rb.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, title: "Art hinzufügen" do %>
+                  <%= image_tag("plus.png", size: "20x20") %>
+              <% end %></td>
+            <td><%= link_to rb, method: :delete, data: { confirm: 'Projekt entfernen?' }, title: "Projekt enfernen" do %>
+                  <%= image_tag("minus.png", size: "20x20")  %>
+              <% end %></td>
+        <% elsif rb.ebene == 1 %>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><%= link_to new_rolle_path(id: rb.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, title: "Rolle hinzufügen" do %>
+                  <%= image_tag("plus.png", size: "20x20")  %>
+              <% end %></td>
+            <td><%= link_to rb, method: :delete, data: { confirm: 'Art entfernen?' }, title: "Art entfernen" do %>
+                  <%= image_tag("minus.png", size: "20x20")  %>
+              <% end %></td>
+        <% elsif rb.ebene == 2 %>
+            <td><%= rb.qualifikation %></td>
+            <td><%= rb.erfahrung %></td>
+            <td></td>
+            <td><%= link_to rb, method: :delete, data: { confirm: 'Rolle entfernen?' }, title: "Rolle entfernen" do %>
+                  <%= image_tag("minus.png", size: "20x20")  %>
+              <% end %></td>
+        <% end %>
       </tr>
-    <% end %>
+
+  <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'Neues Projekt anlegen', new_rb_path %>
+<%= link_to "Neues Projekt anlegen", new_rb_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'} if Wb.where(ebene: 0).blank? %>
+
+
+<div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

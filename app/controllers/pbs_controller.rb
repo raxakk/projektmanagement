@@ -115,7 +115,7 @@ class PbsController < ApplicationController
 
     respond_to do |format|
       if @pb.save
-        format.html { redirect_to @pb, notice: 'Pb was successfully created.' }
+        format.html { redirect_to @pb, notice: 'Erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @pb }
       else
         format.html { render :new }
@@ -129,7 +129,7 @@ class PbsController < ApplicationController
   def update
     respond_to do |format|
       if @pb.update(pb_params)
-        format.html { redirect_to @pb, notice: 'Pb was successfully updated.' }
+        format.html { redirect_to @pb, notice: 'Erfolgreich bearbeitet.' }
         format.json { render :show, status: :ok, location: @pb }
       else
         format.html { render :edit }
@@ -143,7 +143,7 @@ class PbsController < ApplicationController
   def destroy
     @pb.destroy
     respond_to do |format|
-      format.html { redirect_to pbs_url, notice: 'Pb was successfully destroyed.' }
+      format.html { redirect_to pbs_url, notice: 'Erfolgreich gelöscht.' }
       format.json { head :no_content }
     end
   end

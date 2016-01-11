@@ -26,15 +26,10 @@
 </p>
 
 <p>
-  <strong>Rb:</strong>
-  <%= @wb.rb_id %>
-</p>
-
-<p>
   <strong>Worker:</strong>
   <%= @wb.worker_id %>
 </p>
 
-<%= button_to 'Edit', edit_pb_path(@pb), class:"btn btn-warning", method: :get %>
+<%= button_to 'Edit', edit_wb_path(@wb), class:"btn btn-warning", method: :get %>
 <br>
-<%= button_to 'Back', pbs_path, class:"btn btn-primary", method: :get %>
+<%= button_to 'Back', wbs_path, class:"btn btn-primary", method: :get %>
