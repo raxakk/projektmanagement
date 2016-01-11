@@ -58,3 +58,104 @@
 <br>
 
 <%= link_to 'Neues Produkt anlegen', new_pb_path %>
+
+<!-- Modal -->
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Neues Produkt hinzufügen</h4>
+      </div>
+      <div class="modal-body">
+        <% pb = new %>
+        <%= render 'form', locals: {pb: @pb = pb} %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal1 -->
+<div id="modal1" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Neues Teilprodukt hinzufügen</h4>
+      </div>
+      <div class="modal-body">
+        <% pb = new_teilprodukt %>
+        <%= render 'form', locals: {pb: @pb = pb} %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal2 -->
+<div id="modal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Neues Modul hinzufügen</h4>
+      </div>
+      <div class="modal-body">
+        <% pb = new_modul() %>
+        <%= render 'form', locals: {pb: @pb = pb} %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal3 -->
+<div id="modal3" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Neues Teilmodul hinzufügen</h4>
+      </div>
+      <div class="modal-body">
+        <% pb = new_teilprodukt %>
+        <%= render 'form', locals: {pb: @pb = pb} %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal4 -->
+<div id="modal4" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Neue Komponente hinzufügen</h4>
+      </div>
+      <div class="modal-body">
+        <% pb = new_teilprodukt %>
+        <%= render 'form', locals: {pb: @pb = pb} %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>

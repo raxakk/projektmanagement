@@ -1,24 +1,22 @@
 <p id="notice"><%= notice %></p>
-
+<h1>Details</h1>
 <p>
   <strong>Name:</strong>
   <%= @rb.name %>
 </p>
 
-<p>
-  <strong>Parent:</strong>
-  <%= @rb.parent_id %>
-</p>
+<% if @rb.ebene == 2 %>
+    <p>
+      <strong>Qualifikation:</strong>
+      <%= @rb.qualifikation %>
+    </p>
 
-<p>
-  <strong>Qualifikation:</strong>
-  <%= @rb.qualifikation %>
-</p>
+    <p>
+      <strong>Erfahrung:</strong>
+      <%= @rb.erfahrung %>
+    </p>
+<% end %>
 
-<p>
-  <strong>Erfahrung:</strong>
-  <%= @rb.erfahrung %>
-</p>
-
-<%= link_to 'Edit', edit_rb_path(@rb) %> |
-<%= link_to 'Back', rbs_path %>
+<%= button_to 'Edit', edit_rb_path(@rb), class:"btn btn-warning", method: :get %>
+<br>
+<%= button_to 'Back', rbs_path, class:"btn btn-primary", method: :get %>

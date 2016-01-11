@@ -5,11 +5,13 @@
 <table class="table">
   <thead>
   <tr>
-    <th class="btn-success" width="100">Produkt</th>
-    <th class="btn-info" width="100">Teilprodukt</th>
-    <th class="btn-warning" width="100">Modul</th>
-    <th class="btn-danger" width="100">Teilmodul</th>
-    <th class="btn-default" width="100">Komponente</th>
+    <th class="gruenerKasten" width="100">Produkt</th>
+    <th class="blauerKasten" width="100">Teilprodukt</th>
+    <th class="gelberKasten" width="100">Modul</th>
+    <th class="roterKasten" width="100">Teilmodul</th>
+    <th class="grauerKasten" width="100">Komponente</th>
+    <th></th>
+    <th></th>
     <th></th>
   </tr>
   </thead>
@@ -21,25 +23,25 @@
             <td></td>
             <td></td>
             <td></td>
-            <td class="btn-default"><%= pb.l1.to_s + '.' + pb.l2.to_s + '.' + pb.l3.to_s + '.' + pb.l4.to_s%></td>
-            <td class="btn-default"><%= link_to pb.name, pb %></td>
+            <td class="grauerKasten"><%= pb.l1.to_s + '.' + pb.l2.to_s + '.' + pb.l3.to_s + '.' + pb.l4.to_s%></td>
+            <td class="grauerKasten"><%= link_to pb.name, pb %></td>
         <%else %>
             <% if pb.l1 && pb.l2 && pb.l3%>
                 <td></td>
                 <td></td>
-                <td class="btn-danger"><%= pb.l1.to_s + '.' + pb.l2.to_s + '.' + pb.l3.to_s %></td>
-                <td class="btn-danger"><%= link_to pb.name, pb %></td>
+                <td class="roterKasten"><%= pb.l1.to_s + '.' + pb.l2.to_s + '.' + pb.l3.to_s %></td>
+                <td class="roterKasten"><%= link_to pb.name, pb %></td>
             <% else %>
                 <% if pb.l1 && pb.l2 %>
                     <td></td>
-                    <td class="btn-warning"><%= pb.l1.to_s + '.' + pb.l2.to_s %></td>
-                    <td class="btn-warning"><%= link_to pb.name, pb %></td>
+                    <td class="gelberKasten"><%= pb.l1.to_s + '.' + pb.l2.to_s %></td>
+                    <td class="gelberKasten"><%= link_to pb.name, pb %></td>
                 <% else %>
                     <% if pb.l1 %>
-                        <td class="btn-info"><%= pb.l1 %></td>
-                        <td class="btn-info"><%= link_to pb.name, pb %></td>
+                        <td class="blauerKasten"><%= pb.l1 %></td>
+                        <td class="blauerKasten"><%= link_to pb.name, pb %></td>
                     <% else %>
-                        <td class="btn-success"><%= link_to pb.name, pb %></td>
+                        <td class="gruenerKasten"><%= link_to pb.name, pb %></td>
                     <% end %>
                 <% end %>
             <% end %>
@@ -50,31 +52,59 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><%= link_to 'Teilprodukt hinzufügen', new_teilprodukt_path(id: pb.id) %></td>
-        <% else if pb.ebene == 1 %>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><%= link_to 'Modul hinzufügen', new_modul_path(id: pb.id) %></td>
-            <% else if pb.ebene == 2 %>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><%= link_to 'Teilmodul hinzufügen', new_teilmodul_path(id: pb.id) %></td>
-                <% else if pb.ebene == 3 %>
-                        <td></td>
-                        <td></td>
-                        <td><%= link_to 'Komponente hinzufügen', new_komponente_path(id: pb.id) %></td>
-                    <% end %>
-                <% end %>
-            <%end%>
-        <%end%>
+            <td><%= link_to new_teilprodukt_path(id: pb.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, title: "Neues Teilprodukt hinzufügen" do %>
+                  <%= image_tag("plus.png", size: "20x20") %>
+              <% end %></td>
+            <td><%= link_to pb, method: :delete, data: { confirm: 'Produkt entfernen?' }, title: "Produkt entfernen" do %>
+                  <%= image_tag("minus.png", size: "20x20")  %>
+              <% end %></td>
+        <% elsif pb.ebene == 1 %>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><%= link_to new_modul_path(id: pb.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, title: "Modul hinzufügen" do %>
+                  <%= image_tag("plus.png", size: "20x20")  %>
+              <% end %></td>
+            <td><%= link_to pb, method: :delete, data: { confirm: 'Teilprodukt entfernen?' }, title: "Teilprodukt entfernen" do %>
+                  <%= image_tag("minus.png", size: "20x20")  %>
+              <% end %></td>
+        <% elsif pb.ebene == 2 %>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><%= link_to new_teilmodul_path(id: pb.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, title: "Teilmodul hinzufügen" do %>
+                  <%= image_tag("plus.png", size: "20x20")  %>
+              <% end %></td>
+            <td><%= link_to pb, method: :delete, data: { confirm: 'Modul entfernen?' }, title: "Modul entfernen" do %>
+                  <%= image_tag("minus.png", size: "20x20")  %>
+              <% end %></td>
+        <% elsif pb.ebene == 3 %>
+            <td></td>
+            <td></td>
+            <td><%= link_to new_komponente_path(id: pb.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, title: "Komponente hinzufügen" do %>
+                  <%= image_tag("plus.png", size: "20x20")  %>
+              <% end %></td>
+            <td><%= link_to pb, method: :delete, data: { confirm: 'Teilmodul entfernen?' }, title: "Teilmodul entfernen" do %>
+                  <%= image_tag("minus.png", size: "20x20")  %>
+              <% end %></td>
+        <% elsif pb.ebene == 4 %>
+            <td></td>
+            <td></td>
+            <td><%= link_to pb, method: :delete, data: { confirm: 'Komponente entfernen?' }, title: "Komponente entfernen" do %>
+                  <%= image_tag("minus.png", size: "20x20")  %>
+              <% end %></td>
+        <% end %>
       </tr>
+
   <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'Neues Produkt anlegen', new_pb_path %>
+
+<%= link_to "Neues Produkt anlegen", new_pb_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'} if Pb.where(ebene: 0).blank? %>
+
+
+<div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
