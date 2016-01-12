@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :wbs
   resources :pbs
   resources :welcome
+  resources :roadmap
 
   delete 'rounds' => 'rounds#destroy'
 
