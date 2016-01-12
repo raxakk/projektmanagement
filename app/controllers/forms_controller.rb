@@ -19,6 +19,7 @@ class FormsController < ApplicationController
 
   # GET /forms/1/edit
   def edit
+    @workers = Worker.all
   end
 
   # POST /forms
@@ -56,7 +57,7 @@ class FormsController < ApplicationController
   def destroy
     @form.destroy
     respond_to do |format|
-      format.html { redirect_to forms_url, notice: 'Form was successfully destroyed.' }
+      format.html { redirect_to rounds_path, notice: 'Form was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

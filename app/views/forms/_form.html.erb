@@ -1,36 +1,26 @@
 <%= form_for(@form) do |f| %>
-  <% if @form.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@form.errors.count, "error") %> prohibited this form from being saved:</h2>
-
-      <ul>
-      <% @form.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="field">
     <%= f.label :optimistisch %><br>
-    <%= f.text_field :opt %>
+    <%= f.text_field :opt, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :pessimistisch %><br>
-    <%= f.text_field :pes %>
+    <%= f.text_field :pes, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :realistisch %><br>
-    <%= f.text_field :real %>
+    <%= f.text_field :real, class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :mitarbeiter %><br>
-    <%= f.number_field :worker_id %>
+    <%= f.select(:worker_id) do %>
+      <%= options_from_collection_for_select(@workers, :id, :name) %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.hidden_field :round_id %>
   </div>
   <div class="actions">
-    <%= f.submit 'Schätzung abgeben' %>
+    <%= f.submit 'Schätzung abgeben', class: 'btn btn-success' %>
   </div>
 <% end %>
