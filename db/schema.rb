@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160106223232) do
+ActiveRecord::Schema.define(version: 20160108120234) do
+
+  create_table "forms", force: :cascade do |t|
+    t.decimal  "opt",        precision: 16, scale: 2
+    t.decimal  "pes",        precision: 16, scale: 2
+    t.decimal  "real",       precision: 16, scale: 2
+    t.integer  "worker_id"
+    t.integer  "round_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
 
   create_table "pbs", force: :cascade do |t|
     t.string   "name"
@@ -36,6 +46,13 @@ ActiveRecord::Schema.define(version: 20160106223232) do
     t.integer  "ebene"
     t.integer  "l1"
     t.integer  "l2"
+  end
+
+  create_table "rounds", force: :cascade do |t|
+    t.integer  "count"
+    t.integer  "member_number"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "wbs", force: :cascade do |t|
