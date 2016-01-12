@@ -14,7 +14,7 @@
   <div class="field">
     <%= f.label :mitarbeiter %><br>
     <%= f.select(:worker_id) do %>
-      <%= options_from_collection_for_select(@workers, :id, :name) %>
+      <%= options_from_collection_for_select(@workers, :id, :name, @form.worker_id) %>
     <% end %>
   </div>
   <div class="field">
