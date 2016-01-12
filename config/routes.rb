@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  resources :rounds
+  resources :forms
   resources :workers
   resources :rbs
   resources :wbs
   resources :pbs
+  resources :welcome
+
+  delete 'rounds' => 'rounds#destroy'
 
   get 'pbs/:id/new_teilprodukt' => 'pbs#new_teilprodukt', as: :new_teilprodukt
   get 'pbs/:id/new_modul' => 'pbs#new_modul', as: :new_modul
@@ -20,7 +25,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

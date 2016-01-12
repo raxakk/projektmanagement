@@ -74,7 +74,7 @@ class WbsController < ApplicationController
 
     respond_to do |format|
       if @wb.save
-        format.html { redirect_to @wb, notice: 'Erfolgreich erstellt.' }
+        format.html { redirect_to wbs_path, notice: 'Erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @wb }
       else
         format.html { render :new }
@@ -88,7 +88,7 @@ class WbsController < ApplicationController
   def update
     respond_to do |format|
       if @wb.update(wb_params)
-        format.html { redirect_to @wb, notice: 'Erfolgreich bearbeitet.' }
+        format.html { redirect_to wbs_path, notice: 'Erfolgreich bearbeitet.' }
         format.json { render :show, status: :ok, location: @wb }
       else
         format.html { render :edit }

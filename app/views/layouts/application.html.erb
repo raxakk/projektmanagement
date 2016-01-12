@@ -18,7 +18,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Projektmanagement</a>
+      <%= link_to "Projektmanagement", "/", title: "Startseite", class:"navbar-brand" %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -28,7 +28,7 @@
         <li><%= link_to 'WBS', wbs_path, title: 'Work Breakdown Structure' %></li>
         <li><%= link_to 'RBS', rbs_path, title: 'Resource Breakdown Structure' %></li>
         <li><%= link_to 'RAM', '/#', title: 'Ressource Allocation Matrix' %></li>
-        <li><%= link_to 'Breitband-Delphi' %></li>
+        <li><%= link_to 'Breitband-Delphi', rounds_path %></li>
         <li><%= link_to 'Roadmap' %></li>
         <li><%= link_to 'Mitarbeiter verwalten', workers_path %></li>
       </ul>
