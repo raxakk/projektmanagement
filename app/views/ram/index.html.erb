@@ -1,0 +1,45 @@
+
+<h1>Resource Breakdown Structure</h1>
+<%= form_tag(:action => :create, :method => :post) %>
+  <table class="table">
+    <thead>
+    <tr>
+      <th class="btn-success" width="100">Gesamtaufgabe</th>
+      <th class="btn-info" width="100">Aufgabe</th>
+      <th class="btn-warning" width="100">Teilaufgabe</th>
+      <th class="btn-danger" width="100">Arbeitspaket</th>
+      <th class="btn-default" width="100">Einsatzmittel</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <!-- @wbs = array, wb= einzelnes Element des Arrays form helpers  -->
+    <% @wbs.each do |wb| %>
+        <tr>
+          <!-- Überprüfung ob Wert vorhanden ist: l1 l2 l3 usw. Beim Ram nur 3 Ebenen.to_s = toString; % Kennzeichnung für ruby code-->
+          <% if wb.l1 && wb.l2 && wb.l3%>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="btn-danger"><%= wb.l1.to_s + '.' + wb.l2.to_s + '.' + wb.l3.to_s %></td>
+              <td class="btn-danger"><%= link_to wb.name, wb %></td>
+              <td> <%= select_tag(:einsatzmittel, options_from_collection_for_select(@einsatzmittel, "id", "name"))%></td>
+          <% else %>
+              <% if wb.l1 && wb.l2 %>
+                  <td><%= wb.l1.to_s + '.' + wb.l2.to_s %></td>
+              <% else %>
+                  <% if wb.l1 %>
+                      <td><%= wb.l1 %></td>
+                  <% else %>
+                      <td></td>
+                  <% end %>
+              <% end %>
+          <% end %>
+
+        </tr>
+    <% end %>
+
+
+    </tbody>
+  </table>
+<%= submit_tag %>
