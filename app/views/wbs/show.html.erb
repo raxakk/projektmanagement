@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<h1>Details</h1>
 <p>
   <strong>Name:</strong>
   <%= @wb.name %>
@@ -26,14 +26,10 @@
 </p>
 
 <p>
-  <strong>Rb:</strong>
-  <%= @wb.rb_id %>
-</p>
-
-<p>
   <strong>Worker:</strong>
   <%= @wb.worker_id %>
 </p>
 
-<%= link_to 'Edit', edit_wb_path(@wb) %> |
-<%= link_to 'Back', wbs_path %>
+<%= button_to 'Edit', edit_wb_path(@wb), class:"btn btn-warning", method: :get %>
+<br>
+<%= button_to 'Back', wbs_path, class:"btn btn-primary", method: :get %>

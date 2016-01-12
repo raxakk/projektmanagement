@@ -1,55 +1,89 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Wbs</h1>
+<h1>Work Breakdown Structure</h1>
 
-<table>
+<table class="table">
   <thead>
-    <tr>
-      <th>Name</th>
-      <th>Parent</th>
-      <th>Beschreibung</th>
-      <th>Start</th>
-      <th>End</th>
-      <th>Rb</th>
-      <th>Worker</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th class="gruenerKasten" width="100">Gesamtaufgabe</th>
+    <th class="blauerKasten" width="100">Aufgabe</th>
+    <th class="gelberKasten" width="100">Teilaufgabe</th>
+    <th class="grauerKasten" width="100">Arbeitspaket</th>
+    <th width="100"></th>
+    <th></th>
+    <th></th>
+  </tr>
   </thead>
-
   <tbody>
-    <% @wbs.each do |wb| %>
+  <% @wbs.each do |wb| %>
       <tr>
         <% if wb.l1 && wb.l2 && wb.l3%>
-            <td><%= wb.l1.to_s + '.' + wb.l2.to_s + '.' + wb.l3.to_s %></td>
+            <td></td>
+            <td></td>
+            <td class="grauerKasten"><%= wb.l1.to_s + '.' + wb.l2.to_s + '.' + wb.l3.to_s %></td>
+            <td class="grauerKasten"><%= link_to wb.name, wb %></td>
         <% else %>
             <% if wb.l1 && wb.l2 %>
-                <td><%= wb.l1.to_s + '.' + wb.l2.to_s %></td>
+                <td></td>
+                <td class="gelberKasten"><%= wb.l1.to_s + '.' + wb.l2.to_s %></td>
+                <td class="gelberKasten"><%= link_to wb.name, wb %></td>
             <% else %>
                 <% if wb.l1 %>
-                    <td><%= wb.l1 %></td>
+                    <td class="blauerKasten"><%= wb.l1 %></td>
+                    <td class="blauerKasten"><%= link_to wb.name, wb %></td>
                 <% else %>
-                    <td></td>
+                    <td class="gruenerKasten"><%= link_to wb.name, wb %></td>
                 <% end %>
             <% end %>
         <% end %>
-        <td><%= wb.name %></td>
-        <td><%= wb.parent_id %></td>
-        <td><%= wb.beschreibung %></td>
-        <td><%= wb.start %></td>
-        <td><%= wb.end %></td>
-        <td><%= wb.rb_id %></td>
-        <td><%= wb.worker_id %></td>
-        <td><%= link_to 'Show', wb %></td>
-        <td><%= link_to 'Edit', edit_wb_path(wb) %></td>
-        <td><%= link_to 'Destroy', wb, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Aufgabe hinzufügen', new_aufgabe_path(id: wb.id) if wb.ebene == 0 %></td>
-        <td><%= link_to 'Teilaufgabe hinzufügen', new_teilaufgabe_path(id: wb.id) if wb.ebene == 1%></td>
-        <td><%= link_to 'Arbeitspaket hinzufügen', new_arbeitspaket_path(id: wb.id) if wb.ebene == 2%></td>
+        <% if wb.ebene == 0 %>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><%= link_to new_aufgabe_path(id: wb.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, title: "Neue Aufgabe hinzufügen" do %>
+                  <%= image_tag("plus.png", size: "20x20") %>
+              <% end %></td>
+            <td><%= link_to wb, method: :delete, data: { confirm: 'Gesamtaufgabe entfernen?' }, title: "Gesamtaufgabe entfernen" do %>
+                  <%= image_tag("minus.png", size: "20x20")  %>
+              <% end %></td>
+        <% elsif wb.ebene == 1 %>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><%= link_to new_teilaufgabe_path(id: wb.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, title: "Teilaufgabe hinzufügen" do %>
+                  <%= image_tag("plus.png", size: "20x20")  %>
+              <% end %></td>
+            <td><%= link_to wb, method: :delete, data: { confirm: 'Aufgabe entfernen?' }, title: "Aufgabe entfernen" do %>
+                  <%= image_tag("minus.png", size: "20x20")  %>
+              <% end %></td>
+        <% elsif wb.ebene == 2 %>
+            <td></td>
+            <td></td>
+            <td><%= link_to new_arbeitspaket_path(id: wb.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, title: "Arbeitspaket hinzufügen" do %>
+                  <%= image_tag("plus.png", size: "20x20")  %>
+              <% end %></td>
+            <td><%= link_to wb, method: :delete, data: { confirm: 'Teilaufgabe entfernen?' }, title: "Teilaufgabe entfernen" do %>
+                  <%= image_tag("minus.png", size: "20x20")  %>
+              <% end %></td>
+        <% elsif wb.ebene == 3 %>
+            <td></td>
+            <td></td>
+            <td><%= link_to wb, method: :delete, data: { confirm: 'Teilmodul entfernen?' }, title: "Arbeitspaket entfernen" do %>
+                  <%= image_tag("minus.png", size: "20x20")  %>
+              <% end %></td>
+        <% end %>
       </tr>
-    <% end %>
+
+  <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'Neue Gesamtaufgabe anlegen', new_wb_path %>
+
+
+<%= link_to "Neue Gesamtaufgabe anlegen", new_wb_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'} if Wb.where(ebene: 0).blank? %>
+
+
+<div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

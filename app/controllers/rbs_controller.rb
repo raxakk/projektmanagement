@@ -17,6 +17,10 @@ class RbsController < ApplicationController
     @rb = Rb.new
     @rb.parent_id = params[:id]
     @rb.ebene = 0
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new_art
@@ -31,6 +35,10 @@ class RbsController < ApplicationController
     end
 
     @rb.l1 = counter
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new_rolle
@@ -47,7 +55,10 @@ class RbsController < ApplicationController
     end
 
     @rb.l2 = counter
-
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
 
@@ -62,7 +73,7 @@ class RbsController < ApplicationController
 
     respond_to do |format|
       if @rb.save
-        format.html { redirect_to @rb, notice: 'Rb was successfully created.' }
+        format.html { redirect_to @rb, notice: 'Erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @rb }
       else
         format.html { render :new }
@@ -76,7 +87,7 @@ class RbsController < ApplicationController
   def update
     respond_to do |format|
       if @rb.update(rb_params)
-        format.html { redirect_to @rb, notice: 'Rb was successfully updated.' }
+        format.html { redirect_to @rb, notice: 'Erfolgreich bearbeitet.' }
         format.json { render :show, status: :ok, location: @rb }
       else
         format.html { render :edit }
@@ -90,7 +101,7 @@ class RbsController < ApplicationController
   def destroy
     @rb.destroy
     respond_to do |format|
-      format.html { redirect_to rbs_url, notice: 'Rb was successfully destroyed.' }
+      format.html { redirect_to rbs_url, notice: 'Erfolgreich gelöscht.' }
       format.json { head :no_content }
     end
   end

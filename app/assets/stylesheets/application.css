@@ -14,3 +14,25 @@
  *= require_self
  *= require bootstrap.min
  */
+
+.gruenerKasten {
+    background-color: lightgreen;
+}
+.blauerKasten {
+    background-color: lightblue;
+}
+.gelberKasten {
+    background-color: #f9ff6e;
+}
+.roterKasten {
+    background-color: lightcoral;
+}
+.grauerKasten {
+    background-color: #e0e0e0;
+}
+a:hover {
+    background-color: transparent;
+}
+.alertjava {
+    color: red;
+}
