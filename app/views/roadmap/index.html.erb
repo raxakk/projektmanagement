@@ -2,17 +2,30 @@
 
 <h1>Roadmap</h1>
 
-<table class="table" >
+<div class="radio">
+  <label>
+    <input type="radio" name="optionsfeldRadio" id="optionsfeldRadio1" value="option1" checked onClick="Hide('table2', this); Reveal('table1', this)">
+    Tagesansicht
+  </label>
+</div>
+<div class="radio">
+  <label>
+    <input type="radio" name="optionsfeldRadio" id="optionsfeldRadio2" value="option2" onClick="Hide('table1', this); Reveal('table2', this)">
+    3-Tagesansicht
+  </label>
+</div>
+
+<table class="table" id="table1" >
   <thead>
   <tr>
-    <th width="100"></th>
+    <th></th>
     <% @i = 0 %>
     <% (@wbs.first.start..(@wbs.last.end)).each do |some_date| %>
         <% if @i == 0 %>
-            <th class="grauerKasten" width="100"><%= some_date %></th>
+            <th class="box_rotate_grey"><%= some_date.strftime("%d . %m .") %></th>
             <% @i = 1 %>
         <% else %>
-            <th width="100"><%= some_date %></th>
+            <th class="box_rotate"><%= some_date.strftime("%d . %m .") %></th>
             <% @i = 0 %>
         <% end %>
     <% end %>
@@ -20,14 +33,50 @@
   </thead>
   <tbody>
   <% @wbs.each do |wb| %>
+      <% @wbz = (wb.start..(wb.end)) %>
       <tr>
-        <td><%= wb.name %></td>
+        <td><%= link_to wb.name, wb %></td>
         <% (@wbs.first.start..(@wbs.last.end)).each do |all_dates| %>
-            <% (wb.start..(wb.end)).each do |my_date| %>
-                <% if all_dates == my_date %>
-                    <td class="gruenerKasten" ></td>
+            <% if @wbz === all_dates %>
+                <td class="btn-success" ></td>
+            <% else %>
+                <td></td>
+            <% end %>
+        <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<table class="table" id="table2" style="display: none" >
+  <thead>
+  <tr>
+    <th></th>
+    <% @i = 0 %>
+    <% (@wbs.first.start..(@wbs.last.end)).each_with_index do |some_date, idx| %>
+        <% if idx % 3 == 0 %>
+            <% if @i == 0 %>
+                <th class="box_rotate_grey"><%= some_date.strftime("%d . %m .") %></th>
+                <% @i = 1 %>
+            <% else %>
+                <th class="box_rotate"><%= some_date.strftime("%d . %m .") %></th>
+                <% @i = 0 %>
+            <% end %>
+        <% end %>
+    <% end %>
+  </tr>
+  </thead>
+  <tbody>
+  <% @wbs.each do |wb| %>
+      <% @wbz = (wb.start..(wb.end)) %>
+      <tr>
+        <td><%= link_to wb.name, wb %></td>
+        <% (@wbs.first.start..(@wbs.last.end)).each_with_index do |all_dates, idx| %>
+            <% if idx % 3 == 0 %>
+                <% if @wbz === all_dates %>
+                    <td class="btn-success" ></td>
                 <% else %>
-                    <td> no </td>
+                    <td></td>
                 <% end %>
             <% end %>
         <% end %>
