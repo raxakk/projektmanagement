@@ -55,9 +55,7 @@
             <td><%= link_to new_teilprodukt_path(id: pb.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, title: "Neues Teilprodukt hinzufügen" do %>
                   <%= image_tag("plus.png", size: "20x20") %>
               <% end %></td>
-            <td><%= link_to pb, method: :delete, data: { confirm: 'Produkt entfernen?' }, title: "Produkt entfernen" do %>
-                  <%= image_tag("minus.png", size: "20x20")  %>
-              <% end %></td>
+            <td></td>
         <% elsif pb.ebene == 1 %>
             <td></td>
             <td></td>
@@ -102,9 +100,6 @@
 </table>
 
 <br>
-
-
-<%= link_to "Neues Produkt anlegen", new_pb_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'} if Pb.where(ebene: 0).blank? %>
 
 
 <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

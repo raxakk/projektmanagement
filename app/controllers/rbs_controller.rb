@@ -73,7 +73,7 @@ class RbsController < ApplicationController
 
     respond_to do |format|
       if @rb.save
-        format.html { redirect_to @rb, notice: 'Erfolgreich erstellt.' }
+        format.html { redirect_to rbs_path, notice: 'Erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @rb }
       else
         format.html { render :new }
@@ -87,7 +87,7 @@ class RbsController < ApplicationController
   def update
     respond_to do |format|
       if @rb.update(rb_params)
-        format.html { redirect_to @rb, notice: 'Erfolgreich bearbeitet.' }
+        format.html { redirect_to rbs_path, notice: 'Erfolgreich bearbeitet.' }
         format.json { render :show, status: :ok, location: @rb }
       else
         format.html { render :edit }

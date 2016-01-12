@@ -44,9 +44,7 @@
             <td><%= link_to new_aufgabe_path(id: wb.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, title: "Neue Aufgabe hinzufügen" do %>
                   <%= image_tag("plus.png", size: "20x20") %>
               <% end %></td>
-            <td><%= link_to wb, method: :delete, data: { confirm: 'Gesamtaufgabe entfernen?' }, title: "Gesamtaufgabe entfernen" do %>
-                  <%= image_tag("minus.png", size: "20x20")  %>
-              <% end %></td>
+            <td></td>
         <% elsif wb.ebene == 1 %>
             <td></td>
             <td></td>
@@ -80,10 +78,5 @@
 </table>
 
 <br>
-
-
-
-<%= link_to "Neue Gesamtaufgabe anlegen", new_wb_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'} if Wb.where(ebene: 0).blank? %>
-
 
 <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>

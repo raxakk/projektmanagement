@@ -1,26 +1,31 @@
+
 <%= form_for(@pb) do |f| %>
-  <% if @pb.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@pb.errors.count, "error") %> prohibited this pb from being saved:</h2>
+    <% if @pb.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@pb.errors.count, "error") %> prohibited this pb from being saved:</h2>
 
-      <ul>
-      <% @pb.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @pb.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <% if @pb.ebene == 0 %>
+        <h1>Neues Projekt anlegen</h1>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class:"form-control" %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, class:"form-control" %>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :parent_id %>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :ebene %>
-  </div>
+    <div class="field">
+      <%= f.hidden_field :parent_id %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :ebene %>
+    </div>
     <div class="field">
       <%= f.hidden_field :l1 %>
     </div>
@@ -33,11 +38,13 @@
     <div class="field">
       <%= f.hidden_field :l4 %>
     </div>
-  <div class="field">
-    <%= f.label :beschreibung %><br>
-    <%= f.text_field :beschreibung, class:"form-control" %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Speichern', class:"btn btn-success" %>
-  </div>
+    <% if @pb.ebene != 0 %>
+        <div class="field">
+          <%= f.label :beschreibung %><br>
+          <%= f.text_field :beschreibung, class:"form-control" %>
+        </div>
+    <% end %>
+    <div class="actions">
+      <%= f.submit 'Speichern', class:"btn btn-success" %>
+    </div>
 <% end %>

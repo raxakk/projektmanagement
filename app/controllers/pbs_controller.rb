@@ -112,10 +112,22 @@ class PbsController < ApplicationController
   # POST /pbs.json
   def create
     @pb = Pb.new(pb_params)
+    if @pb.ebene == 0
+      @wb = Wb.new
+      @wb.ebene = 0
+      @wb.name = @pb.name
+      @rb = Rb.new
+      @rb.ebene = 0
+      @rb.name = @pb.name
+    end
 
     respond_to do |format|
       if @pb.save
-        format.html { redirect_to @pb, notice: 'Erfolgreich erstellt.' }
+        if !@wb.nil? && !@rb.nil?
+          @wb.save
+          @rb.save
+        end
+        format.html { redirect_to pbs_path, notice: 'Erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @pb }
       else
         format.html { render :new }
@@ -129,7 +141,7 @@ class PbsController < ApplicationController
   def update
     respond_to do |format|
       if @pb.update(pb_params)
-        format.html { redirect_to @pb, notice: 'Erfolgreich bearbeitet.' }
+        format.html { redirect_to pbs_path, notice: 'Erfolgreich bearbeitet.' }
         format.json { render :show, status: :ok, location: @pb }
       else
         format.html { render :edit }
