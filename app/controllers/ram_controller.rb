@@ -6,13 +6,16 @@ class RamController < ApplicationController
 
   # POST /ram
   def create
-
-  end
-
-  private
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def ram_params
-    params.require(:ram).permit(:einsatzmittel)
+    @wbs = Wb.all.order(l1: :asc, l2: :asc, l3: :asc)
+    ems = params[:em]
+    counter = 0
+    @wbs.each do |wb|
+      if wb.ebene == 3
+        wb.update(rb_id: ems[counter])
+        counter = counter + 1
+      end
+    end
+    redirect_to action:"index"
   end
 end
 
