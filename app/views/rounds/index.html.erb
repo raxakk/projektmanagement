@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Schätzrunden:</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Runde</th>
+      <th>Anzahl Experten</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rounds.each do |round| %>
+      <tr>
+        <td><%= round.count %></td>
+        <td><%= round.member_number %></td>
+        <td><%= link_to 'Öffnen', round %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Neue Runde', new_round_path %> |
+<%= link_to 'Runden zurücksetzen', rounds_path, method: :delete, data: { confirm: 'Sind Sie sicher?' }  %>
