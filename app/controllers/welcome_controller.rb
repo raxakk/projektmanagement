@@ -4,14 +4,4 @@ class WelcomeController < ApplicationController
 
   end
 
-  def create_projekt
-
-  end
-
-  def show
-    @wb = Wb.new
-    @wb.name = "test"
-  end
-
-
 end
