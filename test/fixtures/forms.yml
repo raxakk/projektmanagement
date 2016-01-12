@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  opt: 9.99
+  pes: 9.99
+  real: 9.99
+  worker_id: 1
+  round_id: 1
+
+two:
+  opt: 9.99
+  pes: 9.99
+  real: 9.99
+  worker_id: 1
+  round_id: 1

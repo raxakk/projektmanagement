@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
+  resources :rounds
+  resources :forms
   resources :workers
   resources :rbs
   resources :wbs
   resources :pbs
+
+  delete 'rounds' => 'rounds#destroy'
 
   get 'pbs/:id/new_teilprodukt' => 'pbs#new_teilprodukt', as: :new_teilprodukt
   get 'pbs/:id/new_modul' => 'pbs#new_modul', as: :new_modul
