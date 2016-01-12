@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Workers</h1>
+<h1>Mitarbeiterverwaltung</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -14,9 +14,8 @@
     <% @workers.each do |worker| %>
       <tr>
         <td><%= worker.name %></td>
-        <td><%= link_to 'Show', worker %></td>
-        <td><%= link_to 'Edit', edit_worker_path(worker) %></td>
-        <td><%= link_to 'Destroy', worker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Bearbeiten', edit_worker_path(worker) %></td>
+        <td><%= link_to 'Löschen', worker, method: :delete, data: { confirm: 'Sind Sie sicher?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +23,4 @@
 
 <br>
 
-<%= link_to 'New Worker', new_worker_path %>
+<%= button_to 'Mitarbeiter hinzufügen', new_worker_path, class: 'btn btn-success', method: :get %>

@@ -1,21 +1,10 @@
 <%= form_for(@round) do |f| %>
-  <% if @round.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@round.errors.count, "error") %> prohibited this round from being saved:</h2>
-
-      <ul>
-      <% @round.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div class="field">
     <%= f.label :expertenanzahl %><br>
-    <%= f.number_field :member_number %>
+    <%= f.number_field :member_number, class: 'form-control' %>
   </div>
   <div class="actions">
-    <%= f.submit 'Runde erstellen' %>
+    <%= f.submit 'Runde erstellen', class: 'btn btn-success' %>
   </div>
 <% end %>
