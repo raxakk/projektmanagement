@@ -64,10 +64,10 @@ Die Roadmap wird aus den Arbeitspaketen der Work Breakdown Structure erstellt.
     <% (@wbs.first.start..(@wbs.last.end)).each_with_index do |some_date, idx| %>
         <% if idx % 3 == 0 %>
             <% if @i == 0 %>
-                <th class="box_rotate_grey"><div title="<%= some_date.strftime("%d.%m.%y") %>"><%= some_date.strftime("%d . %m .") %></div></th>
+                <th class="box_rotate_grey"><div title="<%= some_date.strftime("%d.%m.%y") %> - <%= (some_date + 2).strftime("%d.%m.%y") %>"><%= some_date.strftime("%d. %m.") %> - <%= (some_date + 2).strftime("%d. %m.") %></div></th>
                 <% @i = 1 %>
             <% else %>
-                <th class="box_rotate"><div title="<%= some_date.strftime("%d.%m.%y") %>"><%= some_date.strftime("%d . %m .") %></th>
+                <th class="box_rotate"><div title="<%= some_date.strftime("%d.%m.%y") %> - <%= (some_date + 2).strftime("%d.%m.%y") %>"><%= some_date.strftime("%d. %m.") %> - <%= (some_date + 2).strftime("%d. %m.") %></th>
                 <% @i = 0 %>
             <% end %>
         <% end %>
@@ -81,7 +81,7 @@ Die Roadmap wird aus den Arbeitspaketen der Work Breakdown Structure erstellt.
         <td><%= link_to wb.name, wb %></td>
         <% (@wbs.first.start..(@wbs.last.end)).each_with_index do |all_dates, idx| %>
             <% if idx % 3 == 0 %>
-                <% if @wbz === all_dates %>
+                <% if @wbz === all_dates || @wbz === all_dates + 1 || @wbz === all_dates + 2 %>
                     <td class="btn-success" ></td>
                 <% else %>
                     <td></td>
