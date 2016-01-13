@@ -17,6 +17,6 @@
     </p>
 <% end %>
 
-<%= button_to 'Edit', edit_rb_path(@rb), class:"btn btn-warning", method: :get %>
+<%= button_to 'Bearbeiten', edit_rb_path(@rb), class:"btn btn-warning", method: :get %>
 <br>
-<%= button_to 'Back', rbs_path, class:"btn btn-primary", method: :get %>
+<FORM><INPUT Type="button" VALUE="Zurück" onClick="history.go(-1);return true;" class="btn btn-primary"></FORM>

@@ -32,7 +32,7 @@
                     <td class="blauerKasten"><%= wb.l1 %></td>
                     <td class="blauerKasten"><%= link_to wb.name, wb %></td>
                 <% else %>
-                    <td class="gruenerKasten"><%= link_to wb.name, wb %></td>
+                    <td class="gruenerKasten"><%= wb.name %></td>
                 <% end %>
             <% end %>
         <% end %>
@@ -41,7 +41,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><%= link_to new_aufgabe_path(id: wb.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, title: "Neue Aufgabe hinzufügen" do %>
+            <td><%= link_to new_aufgabe_path(id: wb.id), remote: "true", data: { toggle: "modal", target: '#modal-window' }, title: "Neue Aufgabe hinzufügen" do %>
                   <%= image_tag("plus.png", size: "20x20") %>
               <% end %></td>
             <td></td>
@@ -49,7 +49,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><%= link_to new_teilaufgabe_path(id: wb.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, title: "Teilaufgabe hinzufügen" do %>
+            <td><%= link_to new_teilaufgabe_path(id: wb.id), remote: "true", data: { toggle: "modal", target: '#modal-window' }, title: "Teilaufgabe hinzufügen" do %>
                   <%= image_tag("plus.png", size: "20x20")  %>
               <% end %></td>
             <td><%= link_to wb, method: :delete, data: { confirm: 'Aufgabe entfernen?' }, title: "Aufgabe entfernen" do %>
@@ -58,7 +58,7 @@
         <% elsif wb.ebene == 2 %>
             <td></td>
             <td></td>
-            <td><%= link_to new_arbeitspaket_path(id: wb.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}, title: "Arbeitspaket hinzufügen" do %>
+            <td><%= link_to new_arbeitspaket_path(id: wb.id), remote: "true", data: { toggle: "modal", target: '#modal-window' }, title: "Arbeitspaket hinzufügen" do %>
                   <%= image_tag("plus.png", size: "20x20")  %>
               <% end %></td>
             <td><%= link_to wb, method: :delete, data: { confirm: 'Teilaufgabe entfernen?' }, title: "Teilaufgabe entfernen" do %>

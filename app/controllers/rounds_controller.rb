@@ -73,7 +73,7 @@ class RoundsController < ApplicationController
         @round.member_number.times do
           @round.forms.create
         end
-        format.html { redirect_to rounds_path, notice: 'Round was successfully created.' }
+        format.html { redirect_to rounds_path, notice: 'Erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @round }
       else
         format.html { render :new }
@@ -87,7 +87,7 @@ class RoundsController < ApplicationController
   def update
     respond_to do |format|
       if @round.update(round_params)
-        format.html { redirect_to @round, notice: 'Round was successfully updated.' }
+        format.html { redirect_to @round, notice: 'Erfolgreich bearbeitet.' }
         format.json { render :show, status: :ok, location: @round }
       else
         format.html { render :edit }
@@ -101,7 +101,7 @@ class RoundsController < ApplicationController
   def destroy
     Round.destroy_all
     respond_to do |format|
-      format.html { redirect_to rounds_url, notice: 'Runden erfolgreich zurückgesetzt' }
+      format.html { redirect_to rounds_url, notice: 'Runden erfolgreich zurückgesetzt.' }
       format.json { head :no_content }
     end
   end

@@ -6,30 +6,24 @@
 </p>
 
 <p>
-  <strong>Parent:</strong>
-  <%= @wb.parent_id %>
-</p>
-
-<p>
   <strong>Beschreibung:</strong>
   <%= @wb.beschreibung %>
 </p>
 
+<% if @wb.ebene == 3 %>
+
 <p>
   <strong>Start:</strong>
-  <%= @wb.start %>
+  <%= @wb.start.strftime("%d.%m.%y") %>
 </p>
 
 <p>
-  <strong>End:</strong>
-  <%= @wb.end %>
+  <strong>Ende:</strong>
+  <%= @wb.end.strftime("%d.%m.%y") %>
 </p>
 
-<p>
-  <strong>Worker:</strong>
-  <%= @wb.worker_id %>
-</p>
+<% end %>
 
-<%= button_to 'Edit', edit_wb_path(@wb), class:"btn btn-warning", method: :get %>
+<%= button_to 'Bearbeiten', edit_wb_path(@wb), class:"btn btn-warning", method: :get %>
 <br>
-<%= button_to 'Back', wbs_path, class:"btn btn-primary", method: :get %>
+<FORM><INPUT Type="button" VALUE="Zurück" onClick="history.go(-1);return true;" class="btn btn-primary"></FORM>
