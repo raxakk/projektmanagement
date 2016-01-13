@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :pbs
   resources :welcome
   resources :roadmap
+  resources :ram
 
   delete 'rounds' => 'rounds#destroy'
 
@@ -21,6 +22,8 @@ Rails.application.routes.draw do
 
   get 'rbs/:id/new_art' => 'rbs#new_art', as: :new_art
   get 'rbs/:id/new_rolle' => 'rbs#new_rolle', as: :new_rolle
+
+  delete 'welcome' => 'welcome#destroy', as: :delete_project
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

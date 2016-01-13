@@ -1,0 +1,61 @@
+
+<h1>Resource Allocation Matrix</h1>
+<%= form_tag(:action => :create, :method => :post) %>
+<table class="table">
+  <thead>
+  <tr>
+    <th class="gruenerKasten" width="100">Gesamtaufgabe</th>
+    <th class="blauerKasten" width="100">Aufgabe</th>
+    <th class="gelberKasten" width="100">Teilaufgabe</th>
+    <th class="grauerKasten" width="100">Arbeitspaket</th>
+    <th class="grauerKasten" width="100">Einsatzmittel</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @wbs.each do |wb| %>
+      <tr>
+        <% if wb.l1 && wb.l2 && wb.l3%>
+            <td></td>
+            <td></td>
+            <td class="grauerKasten"><%= wb.l1.to_s + '.' + wb.l2.to_s + '.' + wb.l3.to_s %></td>
+            <td class="grauerKasten"><%= link_to wb.name, wb %></td>
+            <% if wb.rb_id != nil %>
+                <td class="grauerKasten"> <%= select_tag "em[]",options_from_collection_for_select(@einsatzmittel, "id", "name", wb.rb_id)%></td>
+            <%else%>
+                <td class="grauerKasten"> <%= select_tag "em[]",options_from_collection_for_select(@einsatzmittel, "id", "name")%></td>
+            <%end%>
+        <% else %>
+            <% if wb.l1 && wb.l2 %>
+                <td></td>
+                <td class="gelberKasten"><%= wb.l1.to_s + '.' + wb.l2.to_s %></td>
+                <td class="gelberKasten"><%= link_to wb.name, wb %></td>
+            <% else %>
+                <% if wb.l1 %>
+                    <td class="blauerKasten"><%= wb.l1 %></td>
+                    <td class="blauerKasten"><%= link_to wb.name, wb %></td>
+                <% else %>
+                    <td class="gruenerKasten"><%= link_to wb.name, wb %></td>
+                <% end %>
+            <% end %>
+        <% end %>
+        <% if wb.ebene == 0 %>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        <% elsif wb.ebene == 1 %>
+            <td></td>
+            <td></td>
+            <td></td>
+        <% elsif wb.ebene == 2 %>
+            <td></td>
+            <td></td>
+        <% elsif wb.ebene == 3 %>
+
+        <% end %>
+      </tr>
+
+  <% end %>
+  </tbody>
+</table>
+<%= submit_tag "Speichern",class:"btn btn-success" %>

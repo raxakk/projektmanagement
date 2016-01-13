@@ -24,5 +24,6 @@
 
 <br>
 
-<%= link_to 'Neue Runde', new_round_path %> |
-<%= link_to 'Runden zurücksetzen', rounds_path, method: :delete, data: { confirm: 'Sind Sie sicher?' }  %>
+<%= button_to 'Neue Runde', new_round_path, method: :get, class: 'btn btn-success' %>
+<hr>
+<%= button_to 'Runden zurücksetzen', rounds_path, class: 'btn btn-danger', method: :delete, data: { confirm: 'Sind Sie sicher?' }  %>

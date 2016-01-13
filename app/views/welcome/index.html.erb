@@ -1,9 +1,12 @@
 <h1>Wilkommen</h1>
 <% if Pb.where(ebene: 0).blank? %>
     <br>
-    Bitte legen Sie ein Projekt an, um das Projektmanagement-Tool verwenden zu können
+    Bitte legen Sie ein Projekt an, um das Projektmanagement-Tool verwenden zu können.
     <hr>
     <%= button_to "Projekt anlegen", new_pb_path , class:"btn btn-success", method: :get %>
 <% else %>
-    Es wurde bereits ein Projekt angelegt. Bitte wählen Sie den Reiter für die gewünschte Methode
+    <br>
+    <h2>Projekt: <%= Pb.where(ebene: 0).first.name %></h2>
+    <hr>
+    <%= button_to 'Projekt löschen', delete_project_path, class: 'btn btn-danger', method: :delete, data: { confirm: 'Sind Sie sicher?' } %>
 <% end %>
