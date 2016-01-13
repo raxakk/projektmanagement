@@ -10,6 +10,6 @@
   <%= @pb.beschreibung %>
 </p>
 
-<%= button_to 'Edit', edit_pb_path(@pb), class:"btn btn-warning", method: :get %>
+<%= button_to 'Bearbeiten', edit_pb_path(@pb), class:"btn btn-warning", method: :get %>
 <br>
-<%= button_to 'Back', pbs_path, class:"btn btn-primary", method: :get %>
+<FORM><INPUT Type="button" VALUE="Zurück" onClick="history.go(-1);return true;" class="btn btn-primary"></FORM>

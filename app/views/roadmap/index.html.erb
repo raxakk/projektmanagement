@@ -2,6 +2,12 @@
 
 <h1>Roadmap</h1>
 
+Die Roadmap wird aus den Arbeitspaketen der Work Breakdown Structure erstellt.
+
+<hr>
+
+<% if !@wbs.first.nil? %>
+
 <div class="radio">
   <label>
     <input type="radio" name="optionsfeldRadio" id="optionsfeldRadio1" value="option1" checked onClick="Hide('table2', this); Reveal('table1', this)">
@@ -15,6 +21,8 @@
   </label>
 </div>
 
+<hr>
+
 <table class="table" id="table1" >
   <thead>
   <tr>
@@ -22,10 +30,10 @@
     <% @i = 0 %>
     <% (@wbs.first.start..(@wbs.last.end)).each do |some_date| %>
         <% if @i == 0 %>
-            <th class="box_rotate_grey"><%= some_date.strftime("%d . %m .") %></th>
+            <th class="box_rotate_grey"><div title="<%= some_date.strftime("%d.%m.%y") %>"><%= some_date.strftime("%d . %m .") %></th>
             <% @i = 1 %>
         <% else %>
-            <th class="box_rotate"><%= some_date.strftime("%d . %m .") %></th>
+            <th class="box_rotate"><div title="<%= some_date.strftime("%d.%m.%y") %>"><%= some_date.strftime("%d . %m .") %></th>
             <% @i = 0 %>
         <% end %>
     <% end %>
@@ -56,10 +64,10 @@
     <% (@wbs.first.start..(@wbs.last.end)).each_with_index do |some_date, idx| %>
         <% if idx % 3 == 0 %>
             <% if @i == 0 %>
-                <th class="box_rotate_grey"><%= some_date.strftime("%d . %m .") %></th>
+                <th class="box_rotate_grey"><div title="<%= some_date.strftime("%d.%m.%y") %>"><%= some_date.strftime("%d . %m .") %></div></th>
                 <% @i = 1 %>
             <% else %>
-                <th class="box_rotate"><%= some_date.strftime("%d . %m .") %></th>
+                <th class="box_rotate"><div title="<%= some_date.strftime("%d.%m.%y") %>"><%= some_date.strftime("%d . %m .") %></th>
                 <% @i = 0 %>
             <% end %>
         <% end %>
@@ -84,8 +92,6 @@
   <% end %>
   </tbody>
 </table>
-
-<br>
-
-
-<div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<% else %>
+  <h4 class="alertjava">Bitte legen Sie zunächst Arbeitspakete in der Work Breakdown Structure an!</h4>
+<% end %>

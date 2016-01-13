@@ -15,3 +15,13 @@
 //= require turbolinks
 //= require bootstrap.min
 //= require_tree .
+
+function Reveal (it, box) {
+    var vis = (box.checked) ? "block" : "none";
+    document.getElementById(it).style.display = vis;
+}
+
+function Hide (it, box) {
+    var vis = (box.checked) ? "none" : "none";
+    document.getElementById(it).style.display = vis;
+}

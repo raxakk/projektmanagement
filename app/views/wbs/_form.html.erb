@@ -22,14 +22,20 @@
       <%= f.label :beschreibung %><br>
       <%= f.text_field :beschreibung, class:"form-control" %>
     </div>
-    <div class="field">
-      <%= f.label :start %><br>
-      <%= f.date_select :start %>
-    </div>
-    <div class="field">
-      <%= f.label :end %><br>
-      <%= f.date_select :end %>
-    </div>
+
+    <% if @wb.ebene == 3 %>
+
+        <div class="field">
+          <%= f.label :start %><br>
+          <%= f.date_select :start %>
+        </div>
+        <div class="field">
+          <%= f.label :end %><br>
+          <%= f.date_select :end %>
+        </div>
+
+    <% end %>
+
     <div class="field">
       <%= f.hidden_field :rb_id %>
     </div>
