@@ -17,17 +17,24 @@
   <tbody>
   <% @rbs.each do |rb| %>
       <tr>
-        <% if rb.l1 && rb.l2 %>
-            <td></td>
-            <td class="gelberKasten"><%= rb.l1.to_s + '.' + rb.l2.to_s %></td>
-            <td class="gelberKasten"><%= link_to rb.name, rb %></td>
+        <% if rb.l1 && rb.l2 && rb.l3 %>
+          <td></td>
+          <td></td>
+          <td class="grauerKasten"><%= rb.l1.to_s + '.' + rb.l2.to_s + '.' + rb.l3.to_s %></td>
+          <td class="grauerKasten"><%= link_to rb.name, rb %></td>
         <% else %>
-            <% if rb.l1 %>
-                <td class="blauerKasten"><%= rb.l1 %></td>
-                <td class="blauerKasten"><%= link_to rb.name, rb %></td>
-            <% else %>
-                <td class="gruenerKasten"><%= rb.name %></td>
-            <% end %>
+          <% if rb.l1 && rb.l2 %>
+              <td></td>
+              <td class="gelberKasten"><%= rb.l1.to_s + '.' + rb.l2.to_s %></td>
+              <td class="gelberKasten"><%= link_to rb.name, rb %></td>
+          <% else %>
+              <% if rb.l1 %>
+                  <td class="blauerKasten"><%= rb.l1 %></td>
+                  <td class="blauerKasten"><%= link_to rb.name, rb %></td>
+              <% else %>
+                  <td class="gruenerKasten"><%= rb.name %></td>
+              <% end %>
+          <% end %>
         <% end %>
         <% if rb.ebene == 0 %>
             <td></td>
@@ -52,7 +59,16 @@
             <td><%= rb.qualifikation %></td>
             <td><%= rb.erfahrung %></td>
             <td></td>
+            <td><%= link_to new_quali_path(id: rb.id), remote: "true", data: { toggle: "modal", target: '#modal-window' }, title: "Qualifikation hinzufügen" do %>
+                  <%= image_tag("plus.png", size: "20x20")  %>
+              <% end %></td>
             <td><%= link_to rb, method: :delete, data: { confirm: 'Rolle entfernen?' }, title: "Rolle entfernen" do %>
+                  <%= image_tag("minus.png", size: "20x20")  %>
+              <% end %></td>
+        <% elsif rb.ebene == 3 %>
+            <td></td>
+            <td></td>
+            <td><%= link_to rb, method: :delete, data: { confirm: 'Qualifikation entfernen?' }, title: "Qualifikation entfernen" do %>
                   <%= image_tag("minus.png", size: "20x20")  %>
               <% end %></td>
         <% end %>

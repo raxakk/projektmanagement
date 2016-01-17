@@ -61,6 +61,27 @@ class RbsController < ApplicationController
     end
   end
 
+  def new_quali
+    @rb = Rb.new
+    @rb.parent_id = params[:id]
+    @rb.ebene = 3
+
+    @rb.l1 = Rb.find(params[:id]).l1
+    @rb.l2 = Rb.find(params[:id]).l2
+
+    counter = 1
+
+    while !Rb.where(l1: @rb.l1, l2: @rb.l2, l3: counter ).blank?
+      counter = counter + 1
+    end
+
+    @rb.l3 = counter
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
 
   # GET /rbs/1/edit
   def edit

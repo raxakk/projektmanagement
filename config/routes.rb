@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   get 'rbs/:id/new_art' => 'rbs#new_art', as: :new_art
   get 'rbs/:id/new_rolle' => 'rbs#new_rolle', as: :new_rolle
+  get 'rbs/:id/new_quali' => 'rbs#new_quali', as: :new_quali
 
   delete 'welcome' => 'welcome#destroy', as: :delete_project
 
