@@ -5,7 +5,7 @@
   <%= @rb.name %>
 </p>
 
-<% if @rb.ebene == 2 %>
+<% if @rb.ebene == 3 %>
     <p>
       <strong>Qualifikation:</strong>
       <%= @rb.qualifikation %>
@@ -14,6 +14,11 @@
     <p>
       <strong>Erfahrung:</strong>
       <%= @rb.erfahrung %>
+    </p>
+
+    <p>
+      <strong>Vollzeitäquvalente:</strong>
+      <%= @rb.vza %>
     </p>
 <% end %>
 
