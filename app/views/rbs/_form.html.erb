@@ -10,15 +10,16 @@
           </ul>
         </div>
     <% end %>
-
-    <div class="field">
-      <%= f.label :name %><br>
-      <%= f.text_field :name, class:"form-control" %>
-    </div>
+    <% if !(@rb.ebene == 3) %>
+        <div class="field">
+          <%= f.label :name %><br>
+          <%= f.text_field :name, class:"form-control" %>
+        </div>
+    <% end %>
     <div class="field">
       <%= f.hidden_field :parent_id %>
     </div>
-    <% if @rb.ebene == 2 %>
+    <% if @rb.ebene == 3 %>
         <div class="field">
           <%= f.label :qualifikation %><br>
           <%= f.text_field :qualifikation, class:"form-control" %>
@@ -26,6 +27,10 @@
         <div class="field">
           <%= f.label :erfahrung %><br>
           <%= f.text_field :erfahrung, class:"form-control" %>
+        </div>
+        <div class="field">
+          <%= f.label :vollzeitäquvalente %>
+          <%= f.number_field :vza, class:"form-control" %>
         </div>
     <% end %>
     <div class="field">
@@ -36,6 +41,9 @@
     </div>
     <div class="field">
       <%= f.hidden_field :l2 %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :l3 %>
     </div>
     <div class="actions">
       <%= f.submit 'Speichern', class:"btn btn-success" %>

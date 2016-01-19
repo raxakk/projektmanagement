@@ -10,6 +10,8 @@
     <th class="gelberKasten" width="100">Rolle</th>
     <th class="grauerKasten" width="100">Qualifikation</th>
     <th class="grauerKasten" width="100">Erfahrung</th>
+    <th class="grauerKasten" width="100"><div title="Vollzeitäquivalente">VZÄ</div></th>
+    <th></th>
     <th></th>
     <th></th>
   </tr>
@@ -18,10 +20,14 @@
   <% @rbs.each do |rb| %>
       <tr>
         <% if rb.l1 && rb.l2 && rb.l3 %>
-          <td></td>
-          <td></td>
-          <td class="grauerKasten"><%= rb.l1.to_s + '.' + rb.l2.to_s + '.' + rb.l3.to_s %></td>
-          <td class="grauerKasten"><%= link_to rb.name, rb %></td>
+            <% if Rb.where(parent_id: Rb.where(id: rb.parent_id).first.id).count > 1 %>
+                <td></td>
+                <td></td>
+                <td class="grauerKasten"><%= rb.l1.to_s + '.' + rb.l2.to_s + '.' + rb.l3.to_s %></td>
+                <td class="grauerKasten"><%= link_to rb.qualifikation, rb %></td>
+                <td class="grauerKasten"><%= rb.erfahrung %></td>
+                <td class="grauerKasten"><%= rb.vza %></td>
+            <% end %>
         <% else %>
           <% if rb.l1 && rb.l2 %>
               <td></td>
@@ -41,11 +47,15 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
+            <td></td>
             <td><%= link_to new_art_path(id: rb.id), remote: "true", data: { toggle: "modal", target: '#modal-window' }, title: "Art hinzufügen" do %>
                   <%= image_tag("plus.png", size: "20x20") %>
               <% end %></td>
             <td></td>
         <% elsif rb.ebene == 1 %>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -56,8 +66,19 @@
                   <%= image_tag("minus.png", size: "20x20")  %>
               <% end %></td>
         <% elsif rb.ebene == 2 %>
-            <td><%= rb.qualifikation %></td>
-            <td><%= rb.erfahrung %></td>
+            <% if Rb.where(parent_id: rb.id).blank? %>
+                <td></td>
+                <td></td>
+                <td></td>
+            <% elsif Rb.where(parent_id: rb.id).count == 1 %>
+                <td class="grauerKasten"><%= Rb.where(parent_id: rb.id).first.qualifikation %></td>
+                <td class="grauerKasten"><%= Rb.where(parent_id: rb.id).first.erfahrung %></td>
+                <td class="grauerKasten"><%= Rb.where(parent_id: rb.id).first.vza %></td>
+            <% elsif Rb.where(parent_id: rb.id).count > 1 %>
+                <td></td>
+                <td></td>
+                <td></td>
+            <% end %>
             <td></td>
             <td><%= link_to new_quali_path(id: rb.id), remote: "true", data: { toggle: "modal", target: '#modal-window' }, title: "Qualifikation hinzufügen" do %>
                   <%= image_tag("plus.png", size: "20x20")  %>
@@ -66,11 +87,13 @@
                   <%= image_tag("minus.png", size: "20x20")  %>
               <% end %></td>
         <% elsif rb.ebene == 3 %>
-            <td></td>
-            <td></td>
-            <td><%= link_to rb, method: :delete, data: { confirm: 'Qualifikation entfernen?' }, title: "Qualifikation entfernen" do %>
-                  <%= image_tag("minus.png", size: "20x20")  %>
-              <% end %></td>
+            <% if Rb.where(parent_id: Rb.where(id: rb.parent_id).first.id).count > 1 %>
+                <td></td>
+                <td></td>
+                <td><%= link_to rb, method: :delete, data: { confirm: 'Qualifikation entfernen?' }, title: "Qualifikation entfernen" do %>
+                      <%= image_tag("minus.png", size: "20x20")  %>
+                  <% end %></td>
+            <% end %>
         <% end %>
       </tr>
 

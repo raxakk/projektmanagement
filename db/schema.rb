@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160117150133) do
+ActiveRecord::Schema.define(version: 20160119093747) do
 
   create_table "forms", force: :cascade do |t|
     t.decimal  "opt",        precision: 16, scale: 2
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160117150133) do
     t.integer  "l1"
     t.integer  "l2"
     t.integer  "l3"
+    t.integer  "vza"
   end
 
   create_table "rounds", force: :cascade do |t|
