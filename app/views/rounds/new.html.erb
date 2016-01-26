@@ -1,5 +1,13 @@
+<% if @round.errors.any? %>
+    <% @round.errors.full_messages.each do |msg| %>
+        <div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close"> &times; </a> <%= msg %> </div>
+    <% end %>
+<% end %>
+
 <h1>Neue Runde erstellen</h1>
+
 
 <%= render 'form' %>
 
 <%= link_to 'Zurück', rounds_path %>
+

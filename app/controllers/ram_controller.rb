@@ -15,8 +15,7 @@ class RamController < ApplicationController
         counter = counter + 1
       end
     end
-    redirect_to action:"index"
+    redirect_to ram_index_path, notice: 'Erfolgreich bearbeitet.'
   end
 end
-
 

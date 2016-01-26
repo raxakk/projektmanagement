@@ -1,6 +1,7 @@
-
+<p id="notice"><%= notice %></p>
 <h1>Resource Allocation Matrix</h1>
 <%= form_tag(:action => :create, :method => :post) %>
+
 <table class="table">
   <thead>
   <tr>
@@ -19,10 +20,14 @@
             <td></td>
             <td class="grauerKasten"><%= wb.l1.to_s + '.' + wb.l2.to_s + '.' + wb.l3.to_s %></td>
             <td class="grauerKasten"><%= link_to wb.name, wb %></td>
-            <% if wb.rb_id != nil %>
-                <td class="grauerKasten"> <%= select_tag "em[]",options_from_collection_for_select(@einsatzmittel, "id", "name", wb.rb_id)%></td>
+            <% if @einsatzmittel.blank? %>
+                <td class="grauerKasten"><%= select_tag "people", "<option>Bitte fügen Sie erst im WBS ein Rolle hinzu</option>".html_safe %> </td>
             <%else%>
-                <td class="grauerKasten"> <%= select_tag "em[]",options_from_collection_for_select(@einsatzmittel, "id", "name")%></td>
+                  <% if wb.rb_id != nil %>
+                          <td class="grauerKasten"> <%= select_tag "em[]", options_from_collection_for_select(@einsatzmittel, "id", "name", wb.rb_id)%></td>
+                  <%else%>
+                          <td class="grauerKasten"> <%= select_tag "em[]", options_from_collection_for_select(@einsatzmittel, "id", "name")%></td>
+                  <%end%>
             <%end%>
         <% else %>
             <% if wb.l1 && wb.l2 %>
@@ -58,4 +63,8 @@
   <% end %>
   </tbody>
 </table>
-<%= submit_tag "Speichern",class:"btn btn-success" %>
+<% if @einsatzmittel.blank? %>
+    <%= submit_tag "Speichern", class: "btn btn-success", disabled: "disabled" %>
+<%else%>
+    <%= submit_tag "Speichern", class: "btn btn-success" %>
+<%end%>
